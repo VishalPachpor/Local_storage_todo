@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ToDoProvider } from "./context/Todo";
 
 function App() {
@@ -36,7 +36,19 @@ function App() {
       })
     })
   }
+  // getting teh data in local storage
+  useEffect(()=>{
+      const todos = JSON.parse(localStorage.getItem("todos"))
 
+      if(todos && todos.length  >0){
+        setToDo(todos);
+      }
+  },[])
+
+  // Setting the data in local storage.
+  useEffect(()=> {
+    localStorage.setItem("todos", JSON.stringify(todos))
+  }, [todos])
 
   return (
     <ToDoProvider value={{todos, addToDo, deleteToDo, toggleComplete, updateToDo}}>
