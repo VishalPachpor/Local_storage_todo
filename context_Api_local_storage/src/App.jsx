@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { ToDoProvider } from "./context/Todo";
+import TodoForm from "./components/ToDOForm";
+import TodoItem from "./components/TodoItems";
 
 function App() {
   const [todos, setToDo] = useState([]);
@@ -60,8 +62,20 @@ function App() {
             Manage Your Todos
           </h1>
 
+          <div className="mb-4">
+          <TodoForm />
+          </div>
+
           <div className="flex flex-wrap gap-y-3">
-            {/*Loop and Add TodoItem here */}
+            {/*Loop and Add TodoItem here. With () bracket you don't have to write rutern keyword. with {} you have to */}
+            
+            {todos.map((todo)=>(
+              <div 
+              key={todo.id}
+              className="w-full">
+              <TodoItem todo={todo}/>
+              </div>
+            ))}
           </div>
         </div>
       </div>
